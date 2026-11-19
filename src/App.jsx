@@ -61,6 +61,12 @@ const data = {
 
 const liveProjects = [
   {
+    title: 'Saybolt Group redesign',
+    text: 'A redesign of a company website, built in React and TypeScript with plain CSS and design tokens.',
+    tags: ['React', 'TypeScript', 'Vite'],
+    url: 'https://saybolt-redesign.vercel.app',
+  },
+  {
     title: 'Harrell Orthodontics',
     text: 'A website for an orthodontic practice, with a staff portal and admin area for managing the content.',
     tags: ['React', 'Django', 'Vercel'],
