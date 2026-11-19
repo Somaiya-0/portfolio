@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import {
   LuFileText, LuMedal, LuTrophy, LuUsers, LuRocket, LuZap, LuTent, LuGraduationCap,
-  LuFolderGit2, LuArrowUpRight, LuMail, LuMenu, LuX, LuBookOpen,
+  LuFolderGit2, LuArrowUpRight, LuCheck, LuMail, LuMenu, LuX, LuBookOpen,
 } from 'react-icons/lu'
 import { FaGithub, FaLinkedinIn, FaResearchgate } from 'react-icons/fa6'
 import { SiLeetcode } from 'react-icons/si'
@@ -16,13 +16,13 @@ const data = {
     "I'm a Computer Science and Engineering graduate from Eastern University, passionate about AI and technology. I want to help solve global challenges in healthcare, sustainability and technology using machine learning, programming and human-centered design. My research focuses on reliable ML models for medical data, and I'm looking for hands-on opportunities in AI, software and web development, and for research collaborations.",
   stats: [
     { value: '3.93', label: 'CGPA / 4.00' },
-    { value: '95th', label: 'ICPC Dhaka 2025' },
+    { value: '8', label: 'Contests, 2025 to 2026' },
     { value: 'IEEE', label: 'Published paper' },
     { value: '5+', label: 'Inter-university contests' },
   ],
   highlights: [
     { icon: LuFileText, text: 'Published at IEEE BECITHCON 2025 on brain stroke prediction' },
-    { icon: LuMedal, text: 'ICPC Dhaka Regional 2025: 95th of 300+ teams' },
+    { icon: LuMedal, text: 'ICPC Asia Dhaka Regional 2025: 96th of 313 teams' },
     { icon: LuTrophy, text: 'Champion, 44th Eastern University Intra-University Programming Contest' },
     { icon: LuUsers, text: 'Led my team in five Inter-University Programming Contests' },
     { icon: LuRocket, text: 'Led a team in the NASA Space Apps Challenge 2026' },
@@ -96,7 +96,94 @@ const data = {
   ],
 }
 
-const sections = ['about', 'highlights', 'research', 'skills', 'projects', 'contact']
+
+const post = (id) => `https://www.linkedin.com/feed/update/urn:li:activity:${id}/`
+
+const contests = [
+  {
+    id: 'icpc-dhaka-2025',
+    event: 'ICPC Asia Dhaka Regional 2025',
+    team: 'EU_parina_kichu',
+    rank: '96th',
+    of: 'of 313 teams',
+    solved: 3,
+    badge: 'Biggest Rank Climber & Biggest Rating Gainer',
+    note: 'Qualified from the online preliminary (2 solved), then finished 96th onsite. We topped the Biggest Rank Climber and Biggest Rating Gainer boards on the BCS IUPC Slots Allocation leaderboard, and our team name won 3rd prize.',
+  },
+  {
+    id: 'eu-intra-44',
+    event: '44th Eastern University Intra-University Programming Contest (Level 2)',
+    team: 'Champion',
+    rank: '1st',
+    of: 'Champion',
+    solved: 'All',
+    badge: 'Champion',
+    note: 'Solved every problem and won. It was my last intra-university contest.',
+    url: post('7498867853144666112'),
+  },
+  {
+    id: 'nasa-space-apps',
+    event: 'NASA Space Apps Challenge 2026',
+    team: 'Confused Unga Bunga',
+    rank: 'Lead',
+    of: 'Team lead',
+    badge: 'Team lead · Voice-over',
+    note: 'Led a team of five building Mission Mohakash, a 3D space survival game that trains junior astronauts through six missions on the Moon and Mars using NASA open data. I coordinated the team and recorded the voice-over for our videos.',
+    url: post('7527369380809125889'),
+  },
+  {
+    id: 'ieeextreme-19',
+    event: 'IEEEXtreme 19.0',
+    team: '24-hour global contest',
+    rank: '27th',
+    of: 'in Bangladesh',
+    badge: '4204th globally',
+    note: 'A 24-hour programming contest with teams from around the world.',
+  },
+  {
+    id: 'duet-iupc-2026',
+    event: 'DUET IUPC 2026',
+    team: 'Love_DZB',
+    rank: '82nd',
+    of: 'of 140 teams',
+    solved: 5,
+    note: 'Our strongest inter-university result by problems solved.',
+    url: post('7477289934949847040'),
+  },
+  {
+    id: 'ndub-iupc',
+    event: 'NDUB Inter-University Programming Contest',
+    team: 'EU_meow',
+    rank: '40th',
+    of: 'of 85 teams',
+    solved: 3,
+    note: 'Helped Eastern University climb to 31st in the BCS IUPC Slots Allocation university ranking.',
+  },
+  {
+    id: 'buet-iupc-2026',
+    event: 'BUET IUPC 2026',
+    team: 'EU_parina_kichu',
+    rank: '85th',
+    of: 'of 110 teams',
+    solved: 4,
+    note: 'A tough, highly competitive field.',
+  },
+  {
+    id: 'sust-iupc-2026',
+    event: 'SUST IUPC 2026',
+    team: 'Eastern University',
+    rank: '92nd',
+    of: 'of 130 teams',
+    solved: 2,
+    note: 'My last IUPC. We did not perform as we hoped, but I learned a lot.',
+    url: post('7482431983672033280'),
+  },
+]
+
+const photos = import.meta.glob('./assets/contests/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })
+const photoFor = (id) => Object.entries(photos).find(([k]) => k.includes(`/${id}`))?.[1]
+
+const sections = ['about', 'highlights', 'contests', 'research', 'skills', 'projects', 'contact']
 
 function useReveal() {
   useEffect(() => {
@@ -198,8 +285,48 @@ export default function App() {
           </div>
         </section>
 
+        <section id="contests">
+          <Title n={3}>Contest journey</Title>
+          <p className="intro reveal">
+            Competitive programming has been a big part of my university life. I led my team in every contest
+            I entered.
+          </p>
+          <div className="cp-grid">
+            {contests.map((c) => {
+              const img = photoFor(c.id)
+              return (
+                <article className="glass cp reveal" key={c.id}>
+                  {img && <img className="cp-img" src={img} alt={c.event} loading="lazy" />}
+                  <div className="cp-head">
+                    <div className="cp-rank">
+                      <b className="grad">{c.rank}</b>
+                      <span>{c.of}</span>
+                    </div>
+                    <div className="cp-meta">
+                      <h4>{c.event}</h4>
+                      <p className="cp-team">Team {c.team}</p>
+                    </div>
+                  </div>
+                  <ul className="chips small">
+                    {c.solved !== undefined && (
+                      <li><LuCheck /> {c.solved === 'All' ? 'Solved all problems' : `${c.solved} problems solved`}</li>
+                    )}
+                    {c.badge && <li>{c.badge}</li>}
+                  </ul>
+                  <p>{c.note}</p>
+                  {c.url && (
+                    <a className="cp-link" href={c.url} target="_blank" rel="noreferrer">
+                      <FaLinkedinIn /> View post <LuArrowUpRight />
+                    </a>
+                  )}
+                </article>
+              )
+            })}
+          </div>
+        </section>
+
         <section id="research">
-          <Title n={3}>Research</Title>
+          <Title n={4}>Research</Title>
           <article className="glass paper reveal">
             <span className="badge">IEEE · {data.publication.date}</span>
             <h4>{data.publication.title}</h4>
@@ -212,7 +339,7 @@ export default function App() {
         </section>
 
         <section id="skills">
-          <Title n={4}>Skills</Title>
+          <Title n={5}>Skills</Title>
           <div className="skill-grid">
             {data.skills.map((g, i) => (
               <div className={`glass skill c${i % 4} reveal`} key={g.group}>
@@ -228,7 +355,7 @@ export default function App() {
         </section>
 
         <section id="projects">
-          <Title n={5}>Projects</Title>
+          <Title n={6}>Projects</Title>
           <div className="grid">
             {data.projects.map((p, i) => (
               <article className={`glass card c${i % 4} reveal`} key={p.title}>
@@ -249,7 +376,7 @@ export default function App() {
         </section>
 
         <section id="contact">
-          <Title n={6}>Contact</Title>
+          <Title n={7}>Contact</Title>
           <div className="glass contact reveal">
             <h4>Let's build something great together</h4>
             <p>Looking for an AI, software or research opportunity? My inbox is open.</p>
