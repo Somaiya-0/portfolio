@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import {
   LuFileText, LuMedal, LuTrophy, LuUsers, LuRocket, LuZap, LuTent, LuGraduationCap,
-  LuFolderGit2, LuArrowUpRight, LuCheck, LuGlobe, LuMail, LuMenu, LuX, LuBookOpen,
+  LuFolderGit2, LuArrowUpRight, LuCheck, LuGlobe, LuCrown, LuMail, LuMenu, LuX, LuBookOpen,
 } from 'react-icons/lu'
 import { FaGithub, FaLinkedinIn, FaResearchgate } from 'react-icons/fa6'
 import { SiLeetcode } from 'react-icons/si'
@@ -209,6 +209,16 @@ const nasa = {
 const photos = import.meta.glob('./assets/contests/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })
 const photoFor = (id) => Object.entries(photos).find(([k]) => k.includes(`/${id}`))?.[1]
 
+const featuredIds = ['eu-intra-44', 'icpc-dhaka-2025']
+const featured = featuredIds.map((id) => contests.find((c) => c.id === id))
+const board = contests.filter((c) => !featuredIds.includes(c.id))
+const cpStats = [
+  { value: String(contests.length + 1), label: 'Contests & challenges' },
+  { value: '1st', label: 'EU Intra-University Champion' },
+  { value: '96th', label: 'of 313, ICPC Dhaka Regional' },
+  { value: '27th', label: 'in Bangladesh, IEEEXtreme 19.0' },
+]
+
 const sections = ['about', 'highlights', 'contests', 'research', 'skills', 'projects', 'github', 'contact']
 
 function useReveal() {
@@ -357,38 +367,89 @@ export default function App() {
             Competitive programming has been a big part of my university life. I led my team in every contest
             I entered.
           </p>
-          <div className="cp-grid">
-            {contests.map((c) => {
+
+          <div className="cp-stats reveal">
+            {cpStats.map((x) => (
+              <div key={x.label}>
+                <b className="grad">{x.value}</b>
+                <span>{x.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="cp-feat">
+            {featured.map((c, i) => {
               const img = photoFor(c.id)
               return (
-                <article className="glass cp reveal" key={c.id}>
-                  {img && <img className="cp-img" src={img} alt={c.event} loading="lazy" />}
-                  <div className="cp-head">
-                    <div className="cp-rank">
-                      <b className="grad">{c.rank}</b>
+                <article className={`glass feat ${i === 0 ? 'gold' : 'violet'} reveal`} key={c.id}>
+                  {img && <img className="feat-img" src={img} alt={c.event} loading="lazy" />}
+                  <div className="feat-body">
+                    <div className="feat-top">
+                      <span className="feat-ico">{i === 0 ? <LuCrown /> : <LuTrophy />}</span>
+                      <span className="feat-label">{i === 0 ? 'Champion' : 'Regional finalist'}</span>
+                    </div>
+                    <div className="feat-rank">
+                      <b>{c.rank}</b>
                       <span>{c.of}</span>
                     </div>
-                    <div className="cp-meta">
-                      <h4>{c.event}</h4>
-                      <p className="cp-team">Team {c.team}</p>
-                    </div>
-                  </div>
-                  <ul className="chips small">
-                    {c.solved !== undefined && (
-                      <li><LuCheck /> {c.solved === 'All' ? 'Solved all problems' : `${c.solved} problems solved`}</li>
+                    <h4>{c.event}</h4>
+                    <p className="cp-team">{c.team === 'Champion' ? 'Team EU, with Md Tazri' : `Team ${c.team}`}</p>
+                    <ul className="chips small">
+                      {c.solved !== undefined && (
+                        <li><LuCheck /> {c.solved === 'All' ? 'Solved all problems' : `${c.solved} problems solved`}</li>
+                      )}
+                      {c.badge && c.badge !== 'Champion' && <li>{c.badge}</li>}
+                    </ul>
+                    <p>{c.note}</p>
+                    {c.url && (
+                      <a className="cp-link" href={c.url} target="_blank" rel="noreferrer">
+                        <FaLinkedinIn /> View post <LuArrowUpRight />
+                      </a>
                     )}
-                    {c.badge && <li>{c.badge}</li>}
-                  </ul>
-                  <p>{c.note}</p>
-                  {c.url && (
-                    <a className="cp-link" href={c.url} target="_blank" rel="noreferrer">
-                      <FaLinkedinIn /> View post <LuArrowUpRight />
-                    </a>
-                  )}
+                  </div>
                 </article>
               )
             })}
           </div>
+
+          <h5 className="board-title reveal">More contests</h5>
+          <ul className="board">
+            {board.map((c) => {
+              const img = photoFor(c.id)
+              return (
+                <li className="glass row reveal" key={c.id}>
+                  {img && <img className="row-img" src={img} alt={c.event} loading="lazy" />}
+                  <div className="row-rank">
+                    <b>{c.rank}</b>
+                    <span>{c.of}</span>
+                  </div>
+                  <div className="row-main">
+                    <h4>{c.event}</h4>
+                    <p className="cp-team">{c.team.startsWith('24-hour') ? c.team : `Team ${c.team}`}</p>
+                    <p className="row-note">{c.note}</p>
+                  </div>
+                  <div className="row-side">
+                    {c.solved !== undefined && (
+                      <span className="solved" title={`${c.solved} problems solved`}>
+                        <span className="dots">
+                          {Array.from({ length: c.solved }).map((_, i) => (
+                            <i key={i} />
+                          ))}
+                        </span>
+                        {c.solved} solved
+                      </span>
+                    )}
+                    {c.badge && <span className="row-badge">{c.badge}</span>}
+                    {c.url && (
+                      <a className="cp-link" href={c.url} target="_blank" rel="noreferrer" aria-label={`${c.event} post on LinkedIn`}>
+                        <FaLinkedinIn /> Post <LuArrowUpRight />
+                      </a>
+                    )}
+                  </div>
+                </li>
+              )
+            })}
+          </ul>
         </section>
 
         <section id="research">
