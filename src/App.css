@@ -290,3 +290,5 @@ a.card { color: inherit; text-decoration: none; cursor: pointer; }
   .row.has-img { grid-template-columns: 84px 1fr; }
   .row.has-img .row-img { width: calc(100% + 32px); margin: -16px -16px 4px; }
 }
+
+.cp-feat { align-items: start; }
