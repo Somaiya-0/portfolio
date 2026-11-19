@@ -200,9 +200,9 @@ const nasa = {
   ],
   tags: ['3D game', 'NASA open data', 'Team leadership'],
   links: [
-    { label: 'GitHub repo', url: 'https://github.com/mmhtanvir/MissionMohakash' },
     { label: 'Project page', url: 'https://www.spaceappschallenge.org/2026/find-a-team/confused-unga-bunga/?tab=project' },
-    { label: '4-minute video', url: 'https://lnkd.in/gRYAV3Vg' },
+    { label: '4-minute video', url: 'https://www.youtube.com/watch?v=Q1XFB1vX118' },
+    { label: 'GitHub repo', url: 'https://github.com/mmhtanvir/MissionMohakash' },
   ],
 }
 
