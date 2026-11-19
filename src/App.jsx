@@ -122,16 +122,6 @@ const contests = [
     url: post('7498867853144666112'),
   },
   {
-    id: 'nasa-space-apps',
-    event: 'NASA Space Apps Challenge 2026',
-    team: 'Confused Unga Bunga',
-    rank: 'Lead',
-    of: 'Team lead',
-    badge: 'Team lead · Voice-over',
-    note: 'Led a team of five building Mission Mohakash, a 3D space survival game that trains junior astronauts through six missions on the Moon and Mars using NASA open data. I coordinated the team and recorded the voice-over for our videos.',
-    url: post('7527369380809125889'),
-  },
-  {
     id: 'ieeextreme-19',
     event: 'IEEEXtreme 19.0',
     team: '24-hour global contest',
@@ -179,6 +169,29 @@ const contests = [
     url: post('7482431983672033280'),
   },
 ]
+
+const nasa = {
+  id: 'nasa-space-apps',
+  name: 'Mission Mohakash',
+  event: 'NASA Space Apps Challenge 2026',
+  team: 'Team Confused Unga Bunga',
+  summary:
+    'For the challenge we built a game to train junior astronauts. Mission Mohakash is a 3D space survival game where players act as young astronauts and complete six missions across the Moon and Mars. They manage oxygen and power, collect scientific samples and survive dust storms, learning about real space challenges through NASA open data.',
+  role: 'I was the team lead. I managed our resources, coordinated everyone\'s work, tracked progress and made sure all the pieces came together. I also recorded the voice-over for our project videos.',
+  members: [
+    ['Md Tazri', 'Researcher'],
+    ['Mahamudul Hasan Tanvir', 'Developer'],
+    ['Naem Islam', 'Video editor'],
+    ['Shuvo', 'UI/UX designer'],
+    ['Somaiya Kazi', 'Team lead & voice-over'],
+  ],
+  tags: ['3D game', 'NASA open data', 'Team leadership'],
+  links: [
+    { label: 'Project page', url: 'https://lnkd.in/gQjPeizf' },
+    { label: '4-minute video', url: 'https://lnkd.in/gRYAV3Vg' },
+    { label: 'GitHub repo', url: 'https://lnkd.in/grjqbe2J' },
+  ],
+}
 
 const photos = import.meta.glob('./assets/contests/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })
 const photoFor = (id) => Object.entries(photos).find(([k]) => k.includes(`/${id}`))?.[1]
@@ -285,8 +298,48 @@ export default function App() {
           </div>
         </section>
 
+        <section id="nasa">
+          <Title n={3}>NASA Space Apps Challenge</Title>
+          <article className="glass nasa reveal">
+            {photoFor(nasa.id) && <img className="nasa-img" src={photoFor(nasa.id)} alt={nasa.name} loading="lazy" />}
+            <div className="nasa-body">
+              <span className="badge">{nasa.event}</span>
+              <h4>{nasa.name}</h4>
+              <p className="cp-team">{nasa.team}</p>
+              <p>{nasa.summary}</p>
+              <p>{nasa.role}</p>
+              <ul className="chips small">
+                {nasa.tags.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+              <ul className="team">
+                {nasa.members.map(([n, r]) => (
+                  <li key={n}>
+                    <b>{n}</b>
+                    <span>{r}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="cta nasa-cta">
+                {nasa.links.map((l, i) => (
+                  <a
+                    key={l.label}
+                    className={`btn sm ${i === 0 ? 'primary' : 'ghost'}`}
+                    href={l.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {l.label} <LuArrowUpRight />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </article>
+        </section>
+
         <section id="contests">
-          <Title n={3}>Contest journey</Title>
+          <Title n={4}>Contest journey</Title>
           <p className="intro reveal">
             Competitive programming has been a big part of my university life. I led my team in every contest
             I entered.
@@ -326,7 +379,7 @@ export default function App() {
         </section>
 
         <section id="research">
-          <Title n={4}>Research</Title>
+          <Title n={5}>Research</Title>
           <article className="glass paper reveal">
             <span className="badge">IEEE · {data.publication.date}</span>
             <h4>{data.publication.title}</h4>
@@ -339,7 +392,7 @@ export default function App() {
         </section>
 
         <section id="skills">
-          <Title n={5}>Skills</Title>
+          <Title n={6}>Skills</Title>
           <div className="skill-grid">
             {data.skills.map((g, i) => (
               <div className={`glass skill c${i % 4} reveal`} key={g.group}>
@@ -355,7 +408,7 @@ export default function App() {
         </section>
 
         <section id="projects">
-          <Title n={6}>Projects</Title>
+          <Title n={7}>Projects</Title>
           <div className="grid">
             {data.projects.map((p, i) => (
               <article className={`glass card c${i % 4} reveal`} key={p.title}>
@@ -376,7 +429,7 @@ export default function App() {
         </section>
 
         <section id="contact">
-          <Title n={7}>Contact</Title>
+          <Title n={8}>Contact</Title>
           <div className="glass contact reveal">
             <h4>Let's build something great together</h4>
             <p>Looking for an AI, software or research opportunity? My inbox is open.</p>
