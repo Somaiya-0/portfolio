@@ -417,7 +417,7 @@ export default function App() {
             {board.map((c) => {
               const img = photoFor(c.id)
               return (
-                <li className="glass row reveal" key={c.id}>
+                <li className={`glass row reveal${img ? ' has-img' : ''}`} key={c.id}>
                   {img && <img className="row-img" src={img} alt={c.event} loading="lazy" />}
                   <div className="row-rank">
                     <b>{c.rank}</b>
