@@ -65,18 +65,18 @@ const liveProjects = [
     text: 'A redesign of a company website, built in React and TypeScript with plain CSS and design tokens.',
     tags: ['React', 'TypeScript', 'Vite'],
     url: 'https://saybolt-redesign.vercel.app',
+    github: 'https://github.com/Somaiya-0/saybolt-redesign',
   },
   {
     title: 'Harrell Orthodontics',
     text: 'A website for an orthodontic practice, with a staff portal and admin area for managing the content.',
     tags: ['React', 'Django', 'Vercel'],
     url: 'https://complete-harrell-orthodontics-front.vercel.app',
+    github: 'https://github.com/Somaiya-0/Harrell-Orthodontics',
   },
 ]
 
 const repos = [
-  { title: 'Saybolt Group redesign', text: 'A redesign of a company website in React and TypeScript, using plain CSS with design tokens.', lang: 'TypeScript', url: 'https://github.com/Somaiya-0/saybolt-redesign' },
-  { title: 'Harrell Orthodontics (full stack)', text: 'The complete orthodontic practice project, with a JavaScript frontend and backend.', lang: 'JavaScript', url: 'https://github.com/Somaiya-0/Harrell-Orthodontics' },
   { title: 'Cirqly', text: 'A social media web app.', lang: 'HTML', url: 'https://github.com/Somaiya-0/Social_media_web_app_-Cirqly-' },
   { title: 'Habit Tracker', text: 'Users register, log in and track daily habits. Built with Django and Bootstrap.', lang: 'Python', url: 'https://github.com/Somaiya-0/Habit_Tracker_django_project' },
   { title: 'Employee Management', text: 'A Django application for managing employee records.', lang: 'Python', url: 'https://github.com/Somaiya-0/employee_management_django' },
@@ -422,14 +422,16 @@ export default function App() {
 
         <section id="projects">
           <Title n={7}>Live projects</Title>
-          <p className="intro reveal">Deployed websites. Click a card to open the live site.</p>
+          <p className="intro reveal">Deployed websites. Click a card to open the live site, or use the GitHub button for the code.</p>
           <div className="live-grid">
             {liveProjects.map((p, i) => (
-              <a className={`glass live c${i % 4} reveal`} key={p.title} href={p.url} target="_blank" rel="noreferrer">
+              <article className={`glass live c${i % 4} reveal`} key={p.title}>
                 <LivePreview url={p.url} title={p.title} />
                 <div className="live-body">
                   <div className="live-top">
-                    <h4>{p.title}</h4>
+                    <h4>
+                      <a className="stretch" href={p.url} target="_blank" rel="noreferrer">{p.title}</a>
+                    </h4>
                     <span className="live-tag"><i className="dot" /> Live</span>
                   </div>
                   <p>{p.text}</p>
@@ -438,16 +440,21 @@ export default function App() {
                       <li key={t}>{t}</li>
                     ))}
                   </ul>
-                  <span className="go"><LuGlobe /> Open live site <LuArrowUpRight /></span>
+                  <div className="live-actions">
+                    <span className="go"><LuGlobe /> Open live site <LuArrowUpRight /></span>
+                    <a className="gh-btn" href={p.github} target="_blank" rel="noreferrer">
+                      <FaGithub /> GitHub
+                    </a>
+                  </div>
                 </div>
-              </a>
+              </article>
             ))}
           </div>
         </section>
 
         <section id="github">
           <Title n={8}>GitHub projects</Title>
-          <p className="intro reveal">Source code and learning projects. Click a card to open the repository.</p>
+          <p className="intro reveal">More projects. Click a card to open the repository.</p>
           <div className="grid">
             {repos.map((p, i) => (
               <a className={`glass card c${i % 4} reveal`} key={p.title} href={p.url} target="_blank" rel="noreferrer">

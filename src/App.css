@@ -214,7 +214,8 @@ footer { text-align: center; padding-top: 60px; padding-bottom: 40px; color: var
 @media (max-width: 380px) { .team { grid-template-columns: 1fr; } }
 
 /* project cards */
-a.card, a.live { color: inherit; text-decoration: none; cursor: pointer; }
+a.card { color: inherit; text-decoration: none; cursor: pointer; }
+.live { position: relative; cursor: pointer; }
 .lang { font-size: .78rem; padding: 4px 12px; border-radius: 999px; color: var(--c); border: 1px solid color-mix(in srgb, var(--c) 40%, transparent); background: color-mix(in srgb, var(--c) 10%, transparent); }
 .go { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; font-weight: 600; font-size: .9rem; color: var(--c, var(--cyan)); }
 .card:hover .go svg:last-child, .live:hover .go svg:last-child { transform: translate(2px, -2px); }
@@ -234,3 +235,11 @@ a.card, a.live { color: inherit; text-decoration: none; cursor: pointer; }
   .live-grid { grid-template-columns: 1fr; }
   .live-body { padding: 18px; }
 }
+
+.stretch { color: inherit; text-decoration: none; }
+.stretch::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+.live:hover .stretch { color: var(--cyan); }
+.live-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; }
+.live-actions .go { margin-top: 0; }
+.gh-btn { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 10px; font-size: .88rem; font-weight: 600; color: var(--text); border: 1px solid var(--border); background: var(--glass); transition: .2s; }
+.gh-btn:hover { border-color: var(--violet); background: rgba(139,92,246,.2); transform: translateY(-2px); }
