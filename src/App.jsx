@@ -256,7 +256,7 @@ export default function App() {
         <nav className={menuOpen ? 'open' : ''}>
           {sections.map((s) => (
             <a key={s} href={`#${s}`} onClick={() => setMenuOpen(false)}>
-              {s}
+              {s === 'github' ? 'GitHub' : s}
             </a>
           ))}
         </nav>
