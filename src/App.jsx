@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   LuFileText, LuMedal, LuTrophy, LuUsers, LuRocket, LuZap, LuTent, LuGraduationCap,
-  LuFolderGit2, LuArrowUpRight, LuCheck, LuMail, LuMenu, LuX, LuBookOpen,
+  LuFolderGit2, LuArrowUpRight, LuCheck, LuGlobe, LuMail, LuMenu, LuX, LuBookOpen,
 } from 'react-icons/lu'
 import { FaGithub, FaLinkedinIn, FaResearchgate } from 'react-icons/fa6'
 import { SiLeetcode } from 'react-icons/si'
@@ -49,44 +49,6 @@ const data = {
     { group: 'Data & Bioinformatics', items: ['pandas', 'NumPy', 'Matplotlib', 'RNA-seq', 'edgeR', 'limma', 'GSEA'] },
     { group: 'Web & Tools', items: ['React', 'Django', 'HTML & CSS', 'Tailwind', 'Git', 'Figma'] },
   ],
-  projects: [
-    {
-      title: 'Saybolt Group Redesign',
-      description: 'A website redesign built with React, TypeScript and Vite, using plain CSS with design tokens.',
-      tags: ['React', 'TypeScript', 'Vite'],
-      link: 'https://github.com/Somaiya-0/saybolt-redesign',
-    },
-    {
-      title: 'Harrell Orthodontics',
-      description: 'A full-stack web app with a JavaScript frontend and backend.',
-      tags: ['JavaScript', 'Node.js'],
-      link: 'https://github.com/Somaiya-0/Harrell-Orthodontics',
-    },
-    {
-      title: 'Cirqly',
-      description: 'A social media web app.',
-      tags: ['HTML', 'Web App'],
-      link: 'https://github.com/Somaiya-0/Social_media_web_app_-Cirqly-',
-    },
-    {
-      title: 'Habit Tracker',
-      description: 'A Django app where users register, log in and track daily habits, with a Bootstrap UI.',
-      tags: ['Django', 'Python', 'Bootstrap'],
-      link: 'https://github.com/Somaiya-0/Habit_Tracker_django_project',
-    },
-    {
-      title: 'Employee Management',
-      description: 'A Django application for managing employee records.',
-      tags: ['Django', 'Python'],
-      link: 'https://github.com/Somaiya-0/employee_management_django',
-    },
-    {
-      title: "2x2 Rubik's Cube",
-      description: "An interactive 2x2 Rubik's Cube built in C with OpenGL and GLUT.",
-      tags: ['C', 'OpenGL'],
-      link: 'https://github.com/Somaiya-0/2x2-Rubiks-Cube-opengl-glut-project',
-    },
-  ],
   email: 'somaiiiyaaa@gmail.com',
   links: [
     { label: 'GitHub', Icon: FaGithub, url: 'https://github.com/Somaiya-0' },
@@ -96,6 +58,51 @@ const data = {
   ],
 }
 
+
+const liveProjects = [
+  {
+    title: 'Harrell Orthodontics',
+    text: 'A website for an orthodontic practice, with a staff portal and admin area for managing the content.',
+    tags: ['React', 'Django', 'Vercel'],
+    url: 'https://complete-harrell-orthodontics-front.vercel.app',
+  },
+]
+
+const repos = [
+  { title: 'Saybolt Group redesign', text: 'A redesign of a company website in React and TypeScript, using plain CSS with design tokens.', lang: 'TypeScript', url: 'https://github.com/Somaiya-0/saybolt-redesign' },
+  { title: 'Harrell Orthodontics (full stack)', text: 'The complete orthodontic practice project, with a JavaScript frontend and backend.', lang: 'JavaScript', url: 'https://github.com/Somaiya-0/Harrell-Orthodontics' },
+  { title: 'Cirqly', text: 'A social media web app.', lang: 'HTML', url: 'https://github.com/Somaiya-0/Social_media_web_app_-Cirqly-' },
+  { title: 'Habit Tracker', text: 'Users register, log in and track daily habits. Built with Django and Bootstrap.', lang: 'Python', url: 'https://github.com/Somaiya-0/Habit_Tracker_django_project' },
+  { title: 'Employee Management', text: 'A Django application for managing employee records.', lang: 'Python', url: 'https://github.com/Somaiya-0/employee_management_django' },
+  { title: "2x2 Rubik's Cube", text: "An interactive 2x2 Rubik's Cube written in C with OpenGL and GLUT.", lang: 'C', url: 'https://github.com/Somaiya-0/2x2-Rubiks-Cube-opengl-glut-project' },
+  { title: 'Algorithm', text: 'Algorithm implementations and practice in Python.', lang: 'Python', url: 'https://github.com/Somaiya-0/Algorithm' },
+  { title: 'JavaScript basic projects', text: 'Small JavaScript projects built while learning the language.', lang: 'CSS', url: 'https://github.com/Somaiya-0/JS__Basic_Projects' },
+]
+
+function LivePreview({ url, title }) {
+  const box = useRef(null)
+  const [scale, setScale] = useState(0.3)
+  useEffect(() => {
+    const el = box.current
+    const update = () => setScale(el.clientWidth / 1280)
+    update()
+    const ro = new ResizeObserver(update)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+  return (
+    <div className="frame" ref={box}>
+      <iframe
+        src={url}
+        title={`${title} landing page preview`}
+        loading="lazy"
+        tabIndex={-1}
+        aria-hidden="true"
+        style={{ transform: `scale(${scale})` }}
+      />
+    </div>
+  )
+}
 
 const post = (id) => `https://www.linkedin.com/feed/update/urn:li:activity:${id}/`
 
@@ -187,16 +194,16 @@ const nasa = {
   ],
   tags: ['3D game', 'NASA open data', 'Team leadership'],
   links: [
+    { label: 'GitHub repo', url: 'https://github.com/mmhtanvir/MissionMohakash' },
     { label: 'Project page', url: 'https://lnkd.in/gQjPeizf' },
     { label: '4-minute video', url: 'https://lnkd.in/gRYAV3Vg' },
-    { label: 'GitHub repo', url: 'https://lnkd.in/grjqbe2J' },
   ],
 }
 
 const photos = import.meta.glob('./assets/contests/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })
 const photoFor = (id) => Object.entries(photos).find(([k]) => k.includes(`/${id}`))?.[1]
 
-const sections = ['about', 'highlights', 'contests', 'research', 'skills', 'projects', 'contact']
+const sections = ['about', 'highlights', 'contests', 'research', 'skills', 'projects', 'github', 'contact']
 
 function useReveal() {
   useEffect(() => {
@@ -408,28 +415,50 @@ export default function App() {
         </section>
 
         <section id="projects">
-          <Title n={7}>Projects</Title>
+          <Title n={7}>Live projects</Title>
+          <p className="intro reveal">Deployed websites. Click a card to open the live site.</p>
+          <div className="live-grid">
+            {liveProjects.map((p, i) => (
+              <a className={`glass live c${i % 4} reveal`} key={p.title} href={p.url} target="_blank" rel="noreferrer">
+                <LivePreview url={p.url} title={p.title} />
+                <div className="live-body">
+                  <div className="live-top">
+                    <h4>{p.title}</h4>
+                    <span className="live-tag"><i className="dot" /> Live</span>
+                  </div>
+                  <p>{p.text}</p>
+                  <ul className="chips small">
+                    {p.tags.map((t) => (
+                      <li key={t}>{t}</li>
+                    ))}
+                  </ul>
+                  <span className="go"><LuGlobe /> Open live site <LuArrowUpRight /></span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section id="github">
+          <Title n={8}>GitHub projects</Title>
+          <p className="intro reveal">Source code and learning projects. Click a card to open the repository.</p>
           <div className="grid">
-            {data.projects.map((p, i) => (
-              <article className={`glass card c${i % 4} reveal`} key={p.title}>
+            {repos.map((p, i) => (
+              <a className={`glass card c${i % 4} reveal`} key={p.title} href={p.url} target="_blank" rel="noreferrer">
                 <div className="card-top">
                   <span className="folder"><LuFolderGit2 /></span>
-                  <a href={p.link} target="_blank" rel="noreferrer" aria-label={`${p.title} on GitHub`}><LuArrowUpRight /></a>
+                  <span className="lang">{p.lang}</span>
                 </div>
                 <h4>{p.title}</h4>
-                <p>{p.description}</p>
-                <ul className="chips small">
-                  {p.tags.map((t) => (
-                    <li key={t}>{t}</li>
-                  ))}
-                </ul>
-              </article>
+                <p>{p.text}</p>
+                <span className="go"><FaGithub /> View on GitHub <LuArrowUpRight /></span>
+              </a>
             ))}
           </div>
         </section>
 
         <section id="contact">
-          <Title n={8}>Contact</Title>
+          <Title n={9}>Contact</Title>
           <div className="glass contact reveal">
             <h4>Let's build something great together</h4>
             <p>Looking for an AI, software or research opportunity? My inbox is open.</p>
