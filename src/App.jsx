@@ -122,6 +122,7 @@ const contests = [
     solved: 3,
     badge: 'Biggest Rank Climber & Biggest Rating Gainer',
     note: 'Qualified from the online preliminary (2 solved), then finished 96th onsite. We topped the Biggest Rank Climber and Biggest Rating Gainer boards on the BCS IUPC Slots Allocation leaderboard, and our team name won 3rd prize.',
+    url: 'https://lnkd.in/p/g5uFbqhY',
   },
   {
     id: 'eu-intra-44',
@@ -170,6 +171,7 @@ const contests = [
     of: 'of 110 teams',
     solved: 4,
     note: 'A tough, highly competitive field.',
+    url: 'https://lnkd.in/p/gZsAh7ex',
   },
   {
     id: 'sust-iupc-2026',
