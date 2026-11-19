@@ -174,7 +174,7 @@ const contests = [
   {
     id: 'sust-iupc-2026',
     event: 'SUST IUPC 2026',
-    team: 'Eastern University',
+    team: 'With Md Tazri & Iftikhar Ether',
     rank: '92nd',
     of: 'of 130 teams',
     solved: 2,
@@ -425,7 +425,7 @@ export default function App() {
                   </div>
                   <div className="row-main">
                     <h4>{c.event}</h4>
-                    <p className="cp-team">{c.team.startsWith('24-hour') ? c.team : `Team ${c.team}`}</p>
+                    <p className="cp-team">{c.team.startsWith('24-hour') || c.team.startsWith('With') ? c.team : `Team ${c.team}`}</p>
                     <p className="row-note">{c.note}</p>
                   </div>
                   <div className="row-side">
