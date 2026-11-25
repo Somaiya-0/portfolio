@@ -8,7 +8,7 @@ import { SiLeetcode } from 'react-icons/si'
 import './App.css'
 
 const data = {
-  name: 'Somaiya Kazi',
+  name: 'Somaiya',
   title: 'CSE Graduate · Machine Learning & Web Developer',
   tagline:
     'I build reliable ML models for medical data and ship web apps with React and Django.',
@@ -54,7 +54,7 @@ const data = {
     { label: 'GitHub', Icon: FaGithub, url: 'https://github.com/Somaiya-0' },
     { label: 'LinkedIn', Icon: FaLinkedinIn, url: 'https://www.linkedin.com/in/somaiya-kazi/' },
     { label: 'ResearchGate', Icon: FaResearchgate, url: 'https://www.researchgate.net/profile/Somaiya-Kazi' },
-    { label: 'LeetCode', Icon: SiLeetcode, url: 'https://leetcode.com/u/sumaiyakazi/' },
+    
   ],
 }
 
