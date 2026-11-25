@@ -265,7 +265,7 @@ export default function App() {
 
       <header className="nav">
         <a href="#top" className="logo">
-          <span className="logo-mark">SK</span>
+          <span className="logo-mark">S</span>
           {data.name}
         </a>
         <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
